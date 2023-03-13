@@ -18,7 +18,7 @@ Dim matlabfile: matlabfile = "matlab_script.m"
 
 
 ' <!-- Change at own risk --!>
-Private const WaitTime = 300 ' ms, may need to increase this value... todo: check if window is open https://stackoverflow.com/questions/41621591/vbscript-send-key
+Private const WaitTime = 400 ' ms, may need to increase this value... todo: check if window is open https://stackoverflow.com/questions/41621591/vbscript-send-key
 Set WshShell = WScript.CreateObject("WScript.Shell")
 Set objShell = CreateObject("Shell.Application")
 
