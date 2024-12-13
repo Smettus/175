@@ -37,13 +37,14 @@ def save_counter(count):
 def play_song(path):
     """Play song of choice. Uses mpg321, should be installed in rpios"""
     os.system(f'mpg123 {path}') # add '&' if want the song to continue in the bg
-
+    # mpg321 -q {path} > /dev/null 2>&1
+    #subprocess.run(['mpg123', path, '-q', '> /dev/null 2>&1'])
 def main():
     # GPIO.setmode(GPIO.BCM)
     # PIR_PIN = 17 # is phyisical pin 11
     # GPIO.setup(PIR_PIN, GPIO.IN)
     PIR_PIN = 17
-    song_path = './lesPopos.mp3'
+    song_path = os.path.join(os.getcwd(), 'lesPopos.mp3')
     pir = MotionSensor(PIR_PIN)
     
     count = load_counter()
@@ -67,6 +68,7 @@ def set_audio_output():
     subprocess.run(['amixer', 'set', 'Master', '80%'])
 
 if __name__ == '__main__':
+    logging.info(os.getcwd())
     set_audio_output()
     main()
     
