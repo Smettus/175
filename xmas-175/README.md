@@ -17,6 +17,8 @@ After=network.target
 [Service]
 ExecStart=/usr/bin/python /home/smettus/Documenten/175/xmas-175/xmas_detector.py
 WorkingDirectory=/home/smettus/Documenten/175/xmas-175
+Environment="DISPLAY=:0"
+Environment="PULSE_SERVER=unix:/run/user/1000/pulse/native"
 StandardOutput=inherit
 StandardError=inherit
 Restart=always

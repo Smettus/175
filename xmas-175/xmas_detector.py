@@ -58,7 +58,7 @@ def main():
 
 def set_audio_output():
     # Set audio output to the 3.5mm jack
-    subprocess.run(['amixer', 'cset', 'numid=3', '1'])
+    subprocess.run(['sudo amixer', 'cset', 'numid=3', '1'])
 
     # Unmute the audio
     subprocess.run(['amixer', 'set', 'Master', 'unmute'])
