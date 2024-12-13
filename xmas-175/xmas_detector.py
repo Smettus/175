@@ -35,7 +35,7 @@ def save_counter(count):
         f.write(str(count))
 
 def play_song(path):
-    """Play song of choice. Uses mpg321, should be installed in rpios"""
+    """Play song"""
     os.system(f'mpg123 {path}') # add '&' if want the song to continue in the bg
     # mpg321 -q {path} > /dev/null 2>&1
     #subprocess.run(['mpg123', path, '-q', '> /dev/null 2>&1'])

@@ -1,3 +1,38 @@
+Setup pulseaudio:
+
+Make pulseaudio work system wide:
+```bash
+sudo nano /etc/pulse/daemon.conf
+```
+daemonize = no
+Add or modify the line for system-wide access:
+system-instance = yes
+
+Then:
+```bash
+sudo nano /etc/systemd/system/pulseaudio.service
+```
+```text
+[Unit]
+Description=PulseAudio sound server
+After=sound.target
+
+[Service]
+ExecStart=/usr/bin/pulseaudio --system --disallow-exit --daemonize=no
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+```
+Then:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable pulseaudio.service
+sudo systemctl start pulseaudio.service
+```
+
+
 
 
 Run the script upon startup using `systemd`:
@@ -12,7 +47,7 @@ sudo nano /etc/systemd/system/xmas175.service
 ```text
 [Unit]
 Description=My Python Script
-After=network.target
+After=network.target pulseaudio.service
 
 [Service]
 ExecStart=/usr/bin/python /home/smettus/Documenten/175/xmas-175/xmas_detector.py
@@ -42,6 +77,10 @@ sudo systemctl start xmas175.service
 sudo systemctl status xmas175.service
 ```
 This will show you whether the script is running successfully.
+
+
+
+Try it with `aplay` - only for .wav files though...
 
 
 
