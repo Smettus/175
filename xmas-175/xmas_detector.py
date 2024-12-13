@@ -42,7 +42,7 @@ def main():
     # PIR_PIN = 17 # is phyisical pin 11
     # GPIO.setup(PIR_PIN, GPIO.IN)
     PIR_PIN = 17
-    song_path = './Christmas Tape Vol175.mp3'
+    song_path = './lesPopos.mp3'
     pir = MotionSensor(PIR_PIN)
     
     count = load_counter()
