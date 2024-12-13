@@ -1,3 +1,13 @@
+# Working solution through rc local:
+sudo nano /etc/rc.local
+
+su -s /bin/bash smettus -c '/usr/bin/python /home/smettus/Documenten/175/xmas-175/xmas_detector.py &'
+
+sudo chmod +x /etc/rc.local
+sudo reboot
+
+
+# Non-working (yet)
 Setup pulseaudio:
 
 Make pulseaudio work system wide:
