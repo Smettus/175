@@ -35,7 +35,7 @@ def save_counter(count):
 
 def play_song(path):
     """Play song of choice. Uses mpg321, should be installed in rpios"""
-    os.system(f'mpg321 {path}') # add '&' if want the song to continue in the bg
+    os.system(f'mpg123 {path}') # add '&' if want the song to continue in the bg
 
 def main():
     # GPIO.setmode(GPIO.BCM)
