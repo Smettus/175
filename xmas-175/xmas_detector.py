@@ -6,6 +6,7 @@ from gpiozero import DigitalInputDevice, MotionSensor
 
 # 0) Hardware
 # https://toptechboy.com/understanding-raspberry-pi-4-gpio-pinouts/
+# https://docs.sunfounder.com/projects/umsk/en/latest/05_raspberry_pi/pi_lesson12_pir_motion.html#pi-lesson12-pir-motion
 # 1) Logic & code
 # https://gpiozero.readthedocs.io/en/latest/api_input.html
 # 2) Automate:
