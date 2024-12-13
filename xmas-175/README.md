@@ -1,11 +1,59 @@
-# Working solution through rc local:
-sudo nano /etc/rc.local
 
+# trying this:
+Edit the systemd service:
+
+Open the systemd service file:
+
+sudo nano /etc/systemd/system/mp3_player.service
+
+Update the service file to avoid requiring a login:
+
+Modify the content of the file like this:
+
+[Unit]
+Description=MP3 Player
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/python3 /path/to/play_mp3.py
+WorkingDirectory=/path/to
+StandardOutput=tty
+StandardError=tty
+Restart=always
+User=root
+Group=root
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/pi/.Xauthority
+
+[Install]
+WantedBy=multi-user.target
+
+The important changes are:
+
+    User=root and Group=root: Ensures that the script runs with root permissions without requiring user login.
+    Environment=DISPLAY=:0 and Environment=XAUTHORITY=/home/pi/.Xauthority: These ensure that the script can access the display if needed, particularly for audio output.
+
+Reload the systemd daemon and enable the service:
+
+sudo systemctl daemon-reload
+sudo systemctl enable mp3_player.service
+sudo systemctl start mp3_player.service
+
+# Not working through rc local:
+```
+sudo nano /etc/rc.local
+```
+Add the following line:
 su -s /bin/bash smettus -c '/usr/bin/python /home/smettus/Documenten/175/xmas-175/xmas_detector.py &'
 
+```bash
 sudo chmod +x /etc/rc.local
-sudo reboot
+```
 
+Then:
+```bash
+sudo reboot
+```
 
 # Non-working (yet)
 Setup pulseaudio:
