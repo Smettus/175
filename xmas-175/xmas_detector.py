@@ -1,6 +1,7 @@
 import os
 from time import sleep
 import logging
+import subprocess
 #import RPi.GPIO as GPIO
 from gpiozero import DigitalInputDevice, MotionSensor
 
@@ -55,7 +56,18 @@ def main():
         save_counter(count)
         play_song(song_path)
 
+def set_audio_output():
+    # Set audio output to the 3.5mm jack
+    subprocess.run(['amixer', 'cset', 'numid=3', '1'])
+
+    # Unmute the audio
+    subprocess.run(['amixer', 'set', 'Master', 'unmute'])
+
+    # Set volume to 80%
+    subprocess.run(['amixer', 'set', 'Master', '80%'])
+
 if __name__ == '__main__':
+    set_audio_output()
     main()
     
     
