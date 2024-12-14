@@ -33,12 +33,23 @@ def save_counter(count):
     """Save the counter to a file."""
     with open(counter_file, 'w') as f:
         f.write(str(count))
-
 def play_song(path):
-    """Play song"""
-    os.system(f'mpg123 {path}') # add '&' if want the song to continue in the bg
-    # mpg321 -q {path} > /dev/null 2>&1
-    #subprocess.run(['mpg123', path, '-q', '> /dev/null 2>&1'])
+    """Play song with retry if audio device is busy."""
+    max_retries = 5
+    retries = 0
+    while retries < max_retries:
+        try:
+            os.system(f'mpg123 {path}') # add '&' if want the song to continue in the bg
+            # mpg321 -q {path} > /dev/null 2>&1
+            #subprocess.run(['mpg123', path, '-q', '> /dev/null 2>&1'])
+            break
+        except Exception as e:
+            logging.error(f"Error playing song: {e}")
+            retries += 1
+            sleep(1)
+    if retries == max_retries:
+        logging.error("Failed to play song after multiple attempts.")
+
 def main():
     # GPIO.setmode(GPIO.BCM)
     # PIR_PIN = 17 # is phyisical pin 11
