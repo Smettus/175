@@ -67,7 +67,7 @@ def set_audio_output():
     # Set volume to 80%
     subprocess.run(['amixer', 'set', 'Master', '80%'])
 def start_pulseaudio():
-    """Start PulseAudio in system-wide mode if not already running."""
+    """Start PulseAudio if not already running."""
     subprocess.run(['pulseaudio', '--start'])
 
 if __name__ == '__main__':

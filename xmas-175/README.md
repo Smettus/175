@@ -1,45 +1,42 @@
 
-# trying this:
-Edit the systemd service:
+# Final working setup:
 
-Open the systemd service file:
+Open the systemd service:
+```bash
+sudo nano /etc/systemd/system/xmas175.service
+```
 
-sudo nano /etc/systemd/system/mp3_player.service
-
-Update the service file to avoid requiring a login:
-
-Modify the content of the file like this:
-
+Then add the following lines:
+```text
 [Unit]
-Description=MP3 Player
-After=multi-user.target
+Description=xmastree
+After=sound.target multi-user.target
 
 [Service]
-ExecStart=/usr/bin/python3 /path/to/play_mp3.py
-WorkingDirectory=/path/to
-StandardOutput=tty
-StandardError=tty
+ExecStart=/usr/bin/python /home/smettus/Documenten/175/xmas-175/xmas_detector.p>
+WorkingDirectory=/home/smettus/Documenten/175/xmas-175
+#StandardOutput=tty 
+#StandardError=tty 
 Restart=always
-User=root
-Group=root
+User=smettus
+Group=smettus
 Environment=DISPLAY=:0
-Environment=XAUTHORITY=/home/pi/.Xauthority
+Environment=XAUTHORITY=/home/smettus/.Xauthority
+#Environment=PULSE_SERVER=unix:/run/user/1000/pulse/native
+```
 
-[Install]
-WantedBy=multi-user.target
+ - `Environment=DISPLAY=:0` and `Environment=XAUTHORITY=/home/pi/.Xauthority`: These ensure that the script can access the display if needed, particularly for audio output.
 
-The important changes are:
-
-    User=root and Group=root: Ensures that the script runs with root permissions without requiring user login.
-    Environment=DISPLAY=:0 and Environment=XAUTHORITY=/home/pi/.Xauthority: These ensure that the script can access the display if needed, particularly for audio output.
 
 Reload the systemd daemon and enable the service:
-
+```bash
 sudo systemctl daemon-reload
-sudo systemctl enable mp3_player.service
-sudo systemctl start mp3_player.service
+sudo systemctl enable xmas175.service
+sudo systemctl start xmas175.service
+```
 
-# Not working through rc local:
+# Older stuff:
+## Not working through rc local:
 ```
 sudo nano /etc/rc.local
 ```
@@ -55,7 +52,7 @@ Then:
 sudo reboot
 ```
 
-# Non-working (yet)
+## Non-working (yet)
 Setup pulseaudio:
 
 Make pulseaudio work system wide:
@@ -89,8 +86,6 @@ sudo systemctl daemon-reload
 sudo systemctl enable pulseaudio.service
 sudo systemctl start pulseaudio.service
 ```
-
-
 
 
 Run the script upon startup using `systemd`:
@@ -141,7 +136,7 @@ This will show you whether the script is running successfully.
 Try it with `aplay` - only for .wav files though...
 
 
-
+## Not needed
 Force audio output to 3.5mm jack:
 1.    Edit the /etc/rc.local file:
 ```bash
