@@ -13,7 +13,7 @@ Description=xmastree
 After=sound.target multi-user.target
 
 [Service]
-ExecStart=/usr/bin/python /home/smettus/Documenten/175/xmas-175/xmas_detector.p>
+ExecStart=/usr/bin/python /home/smettus/Documenten/175/xmas-175/xmas_detector.py
 WorkingDirectory=/home/smettus/Documenten/175/xmas-175
 StandardOutput=append:/home/smettus/Documenten/175/xmas-175/service.log
 StandardError=append:/home/smettus/Documenten/175/xmas-175/service.log
@@ -23,6 +23,9 @@ Group=smettus
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=/home/smettus/.Xauthority
 #Environment=PULSE_SERVER=unix:/run/user/1000/pulse/native
+
+[Install]
+WantedBy=multi-user.target
 ```
 
  - `Environment=DISPLAY=:0` and `Environment=XAUTHORITY=/home/pi/.Xauthority`: These ensure that the script can access the display if needed, particularly for audio output.
