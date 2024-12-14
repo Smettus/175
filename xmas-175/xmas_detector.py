@@ -56,6 +56,7 @@ def main():
         logging.info(f"Motion detected! Triggering song. Total detections {count}")
         save_counter(count)
         play_song(song_path)
+        sleep(5)
 
 def set_audio_output():
     # Set audio output to the 3.5mm jack
@@ -71,7 +72,7 @@ def start_pulseaudio():
     subprocess.run(['pulseaudio', '--start'])
 
 if __name__ == '__main__':
-    start_pulseaudio()
+    #start_pulseaudio()
     sleep(2)
     set_audio_output()
     main()
