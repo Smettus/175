@@ -15,8 +15,8 @@ After=sound.target multi-user.target
 [Service]
 ExecStart=/usr/bin/python /home/smettus/Documenten/175/xmas-175/xmas_detector.p>
 WorkingDirectory=/home/smettus/Documenten/175/xmas-175
-#StandardOutput=tty 
-#StandardError=tty 
+StandardOutput=append:/home/smettus/Documenten/175/xmas-175/service.log
+StandardError=append:/home/smettus/Documenten/175/xmas-175/service.log
 Restart=always
 User=smettus
 Group=smettus
