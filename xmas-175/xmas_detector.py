@@ -2,6 +2,7 @@ import os
 from time import sleep
 import logging
 import subprocess
+import pygame
 #import RPi.GPIO as GPIO
 from gpiozero import DigitalInputDevice, MotionSensor
 
@@ -33,8 +34,9 @@ def save_counter(count):
     """Save the counter to a file."""
     with open(counter_file, 'w') as f:
         f.write(str(count))
+"""
 def play_song(path):
-    """Play song with retry if audio device is busy."""
+    #Play song with retry if audio device is busy.
     max_retries = 5
     retries = 0
     while retries < max_retries:
@@ -49,7 +51,19 @@ def play_song(path):
             sleep(1)
     if retries == max_retries:
         logging.error("Failed to play song after multiple attempts.")
-
+"""
+def play_song(path):
+    """Play song using pygame.mixer."""
+    pygame.mixer.init()
+    
+    try:
+        pygame.mixer.music.load(path)
+        pygame.mixer.music.play()
+        logging.info(f"Playing song: {path}")
+        while pygame.mixer.music.get_busy():
+            sleep(0.1)  # Wait for the song to finish playing
+    except Exception as e:
+        logging.error(f"Error playing song: {e}")
 def main():
     # GPIO.setmode(GPIO.BCM)
     # PIR_PIN = 17 # is phyisical pin 11
@@ -63,10 +77,10 @@ def main():
     
     while True:
         pir.wait_for_motion()
-        play_song(song_path)
         count += 1
         logging.info(f"Motion detected! Triggering song. Total detections {count}")
         save_counter(count)
+        play_song(song_path)
         sleep(2)
 
 def set_audio_output():
@@ -80,7 +94,18 @@ def set_audio_output():
     subprocess.run(['amixer', 'set', 'Master', '80%'])
 def start_pulseaudio():
     """Start PulseAudio if not already running."""
-    subprocess.run(['pulseaudio', '--start'])
+    # Check if PulseAudio is already running
+    try:
+        # Check if pulseaudio is already running for the current user
+        result = subprocess.run(['pgrep', '-u', str(os.getuid()), 'pulseaudio'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if result.returncode != 0:
+            # PulseAudio is not running, so start it
+            print("PulseAudio not running, starting it...")
+            subprocess.run(['pulseaudio', '--start'], check=True)
+        else:
+            print("PulseAudio is already running.")
+    except Exception as e:
+        print(f"Failed to check or start PulseAudio: {e}")
 
 if __name__ == '__main__':
     start_pulseaudio()

@@ -27,9 +27,8 @@ from time import sleep
 # doesnt work
 
 # Just do SPI. However, need to level convert in future! 3.3V -> 5V with 
-# simple 1N4001 power diode or with a level converter chip like the 74AHCT125.
+# simple 1N4001 power diode or with a level converter chip like the 74AHCT125 (koop dit).
 # https://learn.adafruit.com/neopixels-on-raspberry-pi/raspberry-pi-wiring
-
 
 
 LED_COUNT = 50

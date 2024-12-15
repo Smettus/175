@@ -1,33 +1,3 @@
-
-# Most robust
-```text
-[Unit]
-Description=Motion-triggered Christmas Song
-After=multi-user.target sound.target
-
-[Service]
-ExecStartPre=/usr/bin/pulseaudio --start
-ExecStartPre=/usr/bin/amixer cset numid=3 1 # Set audio to 3.5mm jack
-ExecStartPre=/usr/bin/amixer set Master unmute
-ExecStartPre=/usr/bin/amixer set Master 80%
-ExecStartPre=/usr/bin/pactl unload-module module-suspend-on-idle
-ExecStartPre=/usr/bin/pactl load-module module-allow-passthrough
-ExecStart=/usr/bin/python3 /home/smettus/Documenten/175/xmas-175/xmas_detector.py
-WorkingDirectory=/home/smettus/Documenten/175/xmas-175
-StandardOutput=append:/home/smettus/Documenten/175/xmas-175/service.log
-StandardError=append:/home/smettus/Documenten/175/xmas-175/service.log
-Restart=always
-User=smettus
-Group=smettus
-Environment=DISPLAY=:0
-Environment=XAUTHORITY=/home/smettus/.Xauthority
-
-[Install]
-WantedBy=multi-user.target
-
-```
-
-
 # Final working setup (but not very robust...):
 
 Open the systemd service:
