@@ -76,7 +76,10 @@ def main():
     logging.info("System initialized. Waiting for motion...")
     
     while True:
-        pir.wait_for_motion()
+        i = 0
+        while i < 3:
+            pir.wait_for_motion()
+            i += 1
         count += 1
         logging.info(f"Motion detected! Triggering song. Total detections {count}")
         save_counter(count)
