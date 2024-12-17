@@ -1,5 +1,5 @@
 import os
-from time import sleep
+from time import sleep, time
 import logging
 import subprocess
 import pygame
@@ -15,6 +15,10 @@ from gpiozero import DigitalInputDevice, MotionSensor
 # crontab -e
 # Add this line at the end:
 # @reboot python path2song
+
+# sensitivity - time window
+time_window = 2
+
 
 logging.basicConfig(
     level=logging.INFO, 
@@ -77,14 +81,22 @@ def main():
     
     while True:
         i = 0
-        while i < 3:
+        
+        start_time = time()
+        while time() - start_time < time_window:
             pir.wait_for_motion()
             i += 1
-        count += 1
-        logging.info(f"Motion detected! Triggering song. Total detections {count}")
-        save_counter(count)
-        play_song(song_path)
-        sleep(2)
+            if i >= 3:
+                break
+            
+        if i >= 3:
+            count += 1
+            logging.info(f"Motion detected! Triggering song. Total detections {count}")
+            save_counter(count)
+            play_song(song_path)
+            sleep(2)
+        else:
+            logging.info(f"Time window expired. Only {i} detections seen.")
 
 def set_audio_output():
     # Set audio output to the 3.5mm jack
