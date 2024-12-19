@@ -17,7 +17,7 @@ from gpiozero import DigitalInputDevice, MotionSensor
 # @reboot python path2song
 
 # sensitivity - time window
-time_window = 2
+time_window = 1
 
 
 logging.basicConfig(
