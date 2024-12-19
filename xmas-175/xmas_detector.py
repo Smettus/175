@@ -96,10 +96,10 @@ def main():
         while time() - start_time < time_window:
             pir.wait_for_motion()
             i += 1
-            if i >= 3:
+            if i >= 6:
                 break
             
-        if i >= 3:
+        if i >= 6:
             count += 1
             logging.info(f"Motion detected! Triggering song. Total detections {count}")
             save_counter(count)
