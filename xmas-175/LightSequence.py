@@ -73,24 +73,6 @@ pixels.fill((0,0, 255))
 pixels.show()
 sleep(1)
 
-pixels.fill((255, 0, 0)) 
-pixels.show()
-sleep(1)
-
-pixels.fill((0,255, 0))
-pixels.show()
-sleep(1)
-
-pixels.fill((0,0, 255))
-pixels.show()
-sleep(1)
-pixels.fill((255, 0, 0)) 
-pixels.show()
-sleep(1)
-
-pixels.fill((0,255, 0))
-pixels.show()
-sleep(1)
 
 # end sequence - make the tree green and red alternating
 # def set_alternate_colors():
