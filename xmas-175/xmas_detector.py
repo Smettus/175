@@ -18,7 +18,7 @@ import threading
 # @reboot python path2song
 
 # sensitivity - time window
-time_window = 1
+time_window = 2
 
 
 logging.basicConfig(
@@ -95,6 +95,7 @@ def main():
         start_time = time()
         while time() - start_time < time_window:
             pir.wait_for_motion()
+            sleep(0.1)
             i += 1
             if i >= 6:
                 break
@@ -120,6 +121,7 @@ def main():
             sleep(2)
         else:
             logging.info(f"Time window expired. Only {i} detections seen.")
+            sleep(0.1)
 
 def set_audio_output():
     # Set audio output to the 3.5mm jack
