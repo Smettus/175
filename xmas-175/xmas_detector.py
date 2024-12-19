@@ -68,6 +68,11 @@ def play_song(path):
             sleep(0.1)  # Wait for the song to finish playing
     except Exception as e:
         logging.error(f"Error playing song: {e}")
+def lightitup(lightpath):
+    venv_activate = "./venv-xmas175/bin/activate"
+    command = f"source {venv_activate} && python {lightpath}"
+    subprocess.run(command, shell=True, executable="/bin/bash", check=True)
+    
 def main():
     # GPIO.setmode(GPIO.BCM)
     # PIR_PIN = 17 # is phyisical pin 11
@@ -93,6 +98,7 @@ def main():
             count += 1
             logging.info(f"Motion detected! Triggering song. Total detections {count}")
             save_counter(count)
+            
             play_song(song_path)
             sleep(2)
         else:
