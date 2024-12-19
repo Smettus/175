@@ -150,10 +150,10 @@ sleep(1)
 # sleep(1)
 
 
-# Make tree off
-pixels.fill((0,0,0))
+# Make tree greeen
+pixels.fill((255,0,0))
 pixels.show()
 sleep(1)
-pixels.fill((0,0,0))
+pixels.fill((255,0,0))
 pixels.show()
 sleep(1)
