@@ -69,6 +69,7 @@ def play_song(path):
     except Exception as e:
         logging.error(f"Error playing song: {e}")
 def lightitup(lightpath):
+    logging.info('Lighting it up!!')
     venv_activate = "./venv-xmas175/bin/activate"
     command = f"source {venv_activate} && python {lightpath}"
     subprocess.run(command, shell=True, executable="/bin/bash", check=True)
