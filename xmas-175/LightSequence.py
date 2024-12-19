@@ -107,29 +107,53 @@ pixels.fill((0,0, 255))
 pixels.show()
 sleep(1)
 
+pixels.fill((255, 0, 0)) 
+pixels.show()
+sleep(1)
+
+pixels.fill((0,255, 0))
+pixels.show()
+sleep(1)
+
+pixels.fill((0,0, 255))
+pixels.show()
+sleep(1)
+
+pixels.fill((255, 0, 0)) 
+pixels.show()
+sleep(1)
+
+pixels.fill((0,255, 0))
+pixels.show()
+sleep(1)
+
+pixels.fill((0,0, 255))
+pixels.show()
+sleep(1)
+
 
 # end sequence - make the tree green and red alternating
-def set_alternate_colors():
-    for i in range(LED_COUNT):
-        if i % 2 == 0:
-            pixels[i] = (0, 255, 0)  # Green
-        else:
-            pixels[i] = (255, 0, 0)  # Red
-    pixels.show()  # Update the LEDs
-    sleep(1)
-    pixels.show()
+# def set_alternate_colors():
+#     for i in range(LED_COUNT):
+#         if i % 2 == 0:
+#             pixels[i] = (0, 255, 0)  # Green
+#         else:
+#             pixels[i] = (255, 0, 0)  # Red
+#     pixels.show()  # Update the LEDs
+#     sleep(1)
+#     pixels.show()
     
-set_alternate_colors()
-sleep(1)
-# to be sure
-set_alternate_colors()
-sleep(1)
+# set_alternate_colors()
+# sleep(1)
+# # to be sure
+# set_alternate_colors()
+# sleep(1)
 
 
 # Make tree off
-# pixels.fill((0,0,0))
-# pixels.show()
-# sleep(1)
-# pixels.fill((0,0,0))
-# pixels.show()
-# sleep(1)
+pixels.fill((0,0,0))
+pixels.show()
+sleep(1)
+pixels.fill((0,0,0))
+pixels.show()
+sleep(1)
