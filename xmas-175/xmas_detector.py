@@ -5,6 +5,7 @@ import subprocess
 import pygame
 #import RPi.GPIO as GPIO
 from gpiozero import DigitalInputDevice, MotionSensor
+import threading
 
 # 0) Hardware
 # https://toptechboy.com/understanding-raspberry-pi-4-gpio-pinouts/
@@ -102,8 +103,20 @@ def main():
             count += 1
             logging.info(f"Motion detected! Triggering song. Total detections {count}")
             save_counter(count)
-            lightitup(lights_path)
-            play_song(song_path)
+            # lightitup(lights_path)
+            # play_song(song_path)
+            
+            light_thread = threading.Thread(target=lightitup, args=(lights_path,))
+            song_thread = threading.Thread(target=play_song, args=(song_path,))
+
+            # Start threads
+            light_thread.start()
+            song_thread.start()
+
+            # Optionally, wait for both to finish
+            light_thread.join()
+            song_thread.join()
+
             sleep(2)
         else:
             logging.info(f"Time window expired. Only {i} detections seen.")
