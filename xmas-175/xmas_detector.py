@@ -101,7 +101,7 @@ def main():
             count += 1
             logging.info(f"Motion detected! Triggering song. Total detections {count}")
             save_counter(count)
-            lightitup()
+            lightitup(lights_path)
             play_song(song_path)
             sleep(2)
         else:
