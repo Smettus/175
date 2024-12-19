@@ -77,8 +77,11 @@ def main():
     # GPIO.setmode(GPIO.BCM)
     # PIR_PIN = 17 # is phyisical pin 11
     # GPIO.setup(PIR_PIN, GPIO.IN)
-    PIR_PIN = 17
+    
     song_path = os.path.join(os.getcwd(), 'lesPopos.mp3')
+    lights_path = os.path.join(os.getcwd(), 'LightSequence.py')
+    
+    PIR_PIN = 17
     pir = MotionSensor(PIR_PIN)
     
     count = load_counter()
@@ -98,7 +101,7 @@ def main():
             count += 1
             logging.info(f"Motion detected! Triggering song. Total detections {count}")
             save_counter(count)
-            
+            lightitup()
             play_song(song_path)
             sleep(2)
         else:
