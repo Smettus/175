@@ -85,6 +85,10 @@ def main():
     
     PIR_PIN = 17
     pir = MotionSensor(PIR_PIN)
+    # queue_len=10,        # Smooth out readings with a queue length of 10
+    # sample_rate=5,       # Read 5 times per second
+    # threshold=0.7,       # Require a higher average to detect motion
+    # partial=False        # Wait for the queue to fill before detecting motion
     
     count = load_counter()
     logging.info("System initialized. Waiting for motion...")
@@ -152,6 +156,7 @@ if __name__ == '__main__':
     sleep(2)
     set_audio_output()
     sleep(2)
+    #sleep(45) # Wait for the PIR sensor to initialize
     main()
     
     
